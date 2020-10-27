@@ -8,19 +8,19 @@ module.exports = class Swap extends Plugin {
       description: "Allows you to change Hypesquad House",
       usage: "{c} (Brilliance, Bravery, Balance)",
       executor: async (args) => {
-        switch (args[0]) {
-          default:
-            return {
-              send: false,
-              result: {
-                type: "rich",
-                title: "Hypesquad",
-                description:
-                  "Please provide a house to swap.\nHouses : Brilliance, Bravery, Balance\nWarning, this is case sensitive.",
-              },
-            };
-            break;
-          case "Brilliance":
+        if (!args[0])
+          return {
+            send: false,
+            result: {
+              type: "rich",
+              title: "Hypesquad",
+              description:
+                "Please provide a house to swap.\nHouses : Brilliance, Bravery, Balance",
+            },
+          };
+        let house = args[0].toLowerCase();
+        switch (house) {
+          case "brilliance":
             require("powercord/webpack")
               .getModule(["joinHypeSquadOnline"], false)
               .joinHypeSquadOnline({ houseID: "HOUSE_2" });
@@ -33,7 +33,7 @@ module.exports = class Swap extends Plugin {
               },
             };
             break;
-          case "Bravery":
+          case "bravery":
             require("powercord/webpack")
               .getModule(["joinHypeSquadOnline"], false)
               .joinHypeSquadOnline({ houseID: "HOUSE_1" });
@@ -46,7 +46,7 @@ module.exports = class Swap extends Plugin {
               },
             };
             break;
-          case "Balance":
+          case "balance":
             require("powercord/webpack")
               .getModule(["joinHypeSquadOnline"], false)
               .joinHypeSquadOnline({ houseID: "HOUSE_3" });
