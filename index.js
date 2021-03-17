@@ -1,5 +1,9 @@
 const { Plugin } = require("powercord/entities");
 
+function swap(house) {
+  require("powercord/webpack").getModule(["joinHypeSquadOnline"], false).joinHypeSquadOnline({ houseID: house });
+};
+
 module.exports = class Swap extends Plugin {
   startPlugin() {
     powercord.api.commands.registerCommand({
@@ -21,41 +25,35 @@ module.exports = class Swap extends Plugin {
         let house = args[0].toLowerCase();
         switch (house) {
           case "brilliance":
-            require("powercord/webpack")
-              .getModule(["joinHypeSquadOnline"], false)
-              .joinHypeSquadOnline({ houseID: "HOUSE_2" });
+            swap("HOUSE_2");
             return {
               send: false,
               result: {
                 type: "rich",
                 title: "Hypesquad",
-                description: "Your house has been swapped to **Brilliance**",
+                description: `Your house has been swapped to **${house}**`,
               },
             };
             break;
           case "bravery":
-            require("powercord/webpack")
-              .getModule(["joinHypeSquadOnline"], false)
-              .joinHypeSquadOnline({ houseID: "HOUSE_1" });
+            swap("HOUSE_1");
             return {
               send: false,
               result: {
                 type: "rich",
                 title: "Hypesquad",
-                description: "Your house has been swapped to **Bravery**",
+                description: `Your house has been swapped to **${house}**`,
               },
             };
             break;
           case "balance":
-            require("powercord/webpack")
-              .getModule(["joinHypeSquadOnline"], false)
-              .joinHypeSquadOnline({ houseID: "HOUSE_3" });
+            swap("HOUSE_3")
             return {
               send: false,
               result: {
                 type: "rich",
                 title: "Hypesquad",
-                description: "Your house has been swapped to **Balance**",
+                description: `Your house has been swapped to **${house}**`,
               },
             };
             break;
